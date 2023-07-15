@@ -2,10 +2,11 @@
 
 namespace FastPizza.Domain.Entities.Categories;
 
-public class Category
+public class Category : Auditable
 {
-    [MinLength(1),MaxLength(200)]
-    public string Name { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
+    public string FullName { get; set; } = string.Empty;
+    public string PhoneNumber { get; set; } = string.Empty;
+    public string ImagePath { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
 
 }

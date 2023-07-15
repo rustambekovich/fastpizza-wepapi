@@ -7,15 +7,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6ABD09FD-491
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{267B7ACC-A153-42A9-97E0-A9B1C0D317AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastPizza.WepApi", "src\FastPizza.WepApi\FastPizza.WepApi.csproj", "{82458956-CD75-49B0-9181-BAF5E9ECCFD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastPizza.WepApi", "src\FastPizza.WepApi\FastPizza.WepApi.csproj", "{82458956-CD75-49B0-9181-BAF5E9ECCFD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastPizza.DataAccess", "src\FastPizza.DataAccess\FastPizza.DataAccess.csproj", "{9BB68567-59F8-4A35-A46B-A862611130FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastPizza.DataAccess", "src\FastPizza.DataAccess\FastPizza.DataAccess.csproj", "{9BB68567-59F8-4A35-A46B-A862611130FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastPizza.Domain", "src\FastPizza.Domain\FastPizza.Domain.csproj", "{2C634420-9FB1-49AA-8263-49ABA74C0E2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastPizza.Domain", "src\FastPizza.Domain\FastPizza.Domain.csproj", "{2C634420-9FB1-49AA-8263-49ABA74C0E2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastPizza.Service", "src\FastPizza.Service\FastPizza.Service.csproj", "{9FF01880-797A-4C8C-A78A-EA4C5206C57B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastPizza.Service", "src\FastPizza.Service\FastPizza.Service.csproj", "{9FF01880-797A-4C8C-A78A-EA4C5206C57B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastPizza.UnitTest", "test\FastPizza.UnitTest\FastPizza.UnitTest.csproj", "{C3EE97FB-431D-44DF-9FEF-93E5618F8FB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastPizza.UnitTest", "test\FastPizza.UnitTest\FastPizza.UnitTest.csproj", "{C3EE97FB-431D-44DF-9FEF-93E5618F8FB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

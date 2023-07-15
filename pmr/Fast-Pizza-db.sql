@@ -26,11 +26,12 @@ create table products
 CREATE TABLE customers
 (
     id bigint generated always as identity primary key,
-    full_name character varying(200) NOT NULL,
-    phone_number character varying(13) NOT NULL,
+    full_name character varying(200),
+    phone_number character varying(13),
     image_path_customer text,
+    email character varying(200) NOT NULL,
     created_at timestamp without time zone default now(),
-	updated_at timestamp without time zone default now()
+    updated_at timestamp without time zone default now()
 );
 
 CREATE TABLE users
@@ -90,13 +91,13 @@ CREATE TABLE orders
     result_price double precision NOT NULL,
     latitude double precision,
     longitude double precision,
-    payment_type text NOT NULL,
-    is_paid boolean NOT NULL,
+    payment_type text,
+    is_paid boolean ,
     description text,
-    order_type text NOT NULL,
+    order_type text ,
     branch_id bigint references branch(id),
     created_at timestamp without time zone default now(),
-	updated_at timestamp without time zone default now()
+    updated_at timestamp without time zone default now()
 );
 
 
