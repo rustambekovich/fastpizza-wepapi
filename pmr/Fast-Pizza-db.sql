@@ -36,7 +36,7 @@ CREATE TABLE customers
 
 CREATE TABLE users
 (
-	id bigint generated always as identity primary key,
+    id bigint generated always as identity primary key,
     first_name character varying(50) NOT NULL,
     last_name character varying(50) NOT NULL,
     middle_name character varying(50),
@@ -50,7 +50,7 @@ CREATE TABLE users
     image_path text NOT NULL,
     identity_role text NOT NULL,
     created_at timestamp without time zone default now(),
-	updated_at timestamp without time zone default now()
+    updated_at timestamp without time zone default now()
 );
 
 

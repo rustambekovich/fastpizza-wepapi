@@ -11,4 +11,13 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FastPizza.Service\FastPizza.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\media\images\" />
+    <Folder Include="wwwroot\media\avatars\" />
+  </ItemGroup>
+
 </Project>
