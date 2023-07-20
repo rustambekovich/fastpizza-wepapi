@@ -71,7 +71,7 @@ namespace FastPizza.Service.Services.Categories
 
         
 
-        public async Task<Category> GetByIdAsync(long id)
+        public async Task<Category?> GetByIdAsync(long id)
         {
             var result = await _repository.GetByIdAsync(id);
             if (result is  null)

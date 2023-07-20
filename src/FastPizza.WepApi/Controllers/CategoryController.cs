@@ -24,7 +24,6 @@ namespace FastPizza.WepApi.Controllers
         {
             var categoryvalidator = new CategoryValidator();
             var validatorResult =  categoryvalidator.Validate(dto);
-            Console.WriteLine(dto.ImagePath.Length);
             if (validatorResult.IsValid)
                 return Ok(await _categoryService.CreateAsync(dto));
             else return BadRequest(validatorResult.Errors);
