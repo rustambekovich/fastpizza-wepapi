@@ -2,12 +2,6 @@
 using FastPizza.DataAccess.Interfaces.Categories;
 using FastPizza.DataAccess.Utils;
 using FastPizza.Domain.Entities.Categories;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Dapper.SqlMapper;
 
 namespace FastPizza.DataAccess.Repositories.Categories
@@ -47,7 +41,7 @@ namespace FastPizza.DataAccess.Repositories.Categories
             {
                 return 0;
             }
-            finally 
+            finally
             {
                 await _connection.CloseAsync();
             }
@@ -60,7 +54,7 @@ namespace FastPizza.DataAccess.Repositories.Categories
             {
                 await _connection.OpenAsync();
                 string query = $"Delete from public.categories Where id=@Id";
-                var result = await _connection.ExecuteAsync(query, new {Id = id});
+                var result = await _connection.ExecuteAsync(query, new { Id = id });
                 return result;
             }
             catch
@@ -85,7 +79,7 @@ namespace FastPizza.DataAccess.Repositories.Categories
             }
             catch
             {
-               IList<Category> result = new List<Category>();
+                IList<Category> result = new List<Category>();
                 return result;
             }
             finally
@@ -100,7 +94,7 @@ namespace FastPizza.DataAccess.Repositories.Categories
             {
                 await _connection.OpenAsync();
                 string query = $"Select * from public.categories where id=@Id";
-                var result = await _connection.QuerySingleAsync<Category>(query,new {Id = id });
+                var result = await _connection.QuerySingleAsync<Category>(query, new { Id = id });
                 return result;
             }
             catch

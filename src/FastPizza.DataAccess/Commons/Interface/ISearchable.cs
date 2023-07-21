@@ -6,6 +6,6 @@ namespace AgileShop.DataAccess.Common.Interfaces;
 
 public interface ISearchable<TEntity>
 {
-    public Task<(int ItemsCount, IList<TEntity>)> SearchAsync(string search, 
+    public Task<(int ItemsCount, IList<TEntity>)> SearchAsync(string search,
         PaginationParams @params);
 }

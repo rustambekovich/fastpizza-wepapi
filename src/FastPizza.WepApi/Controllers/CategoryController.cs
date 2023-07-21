@@ -2,7 +2,6 @@
 using FastPizza.Service.Dtos.CategoryDtos;
 using FastPizza.Service.Interfaces.Categories;
 using FastPizza.Service.Validators.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastPizza.WepApi.Controllers
@@ -16,14 +15,14 @@ namespace FastPizza.WepApi.Controllers
 
         public CategoryController(ICategoryService service)
         {
-            this._categoryService = service; 
+            this._categoryService = service;
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromForm] CategoryCreateDto dto)
         {
             var categoryvalidator = new CategoryValidator();
-            var validatorResult =  categoryvalidator.Validate(dto);
+            var validatorResult = categoryvalidator.Validate(dto);
             if (validatorResult.IsValid)
                 return Ok(await _categoryService.CreateAsync(dto));
             else return BadRequest(validatorResult.Errors);
@@ -39,8 +38,13 @@ namespace FastPizza.WepApi.Controllers
             => Ok(await _categoryService.GetByIdAsync(categoryId));
 
         [HttpPut("categoryId")]
-        public async Task<IActionResult> UpdateAsync(long CategoryId, [FromForm] CategoryCreateDto dto)
-            => Ok(await _categoryService.UpdateAsync(CategoryId, dto));
+        public async Task<IActionResult> UpdateAsync(long CategoryId, [FromForm] CategotryUpdatedDto dto)
+        {
+            var varcategoryUp = new CategoryValidtorUpdate();
+            var resvalidator = varcategoryUp.Validate(dto);
+            if (resvalidator.IsValid) return Ok(await _categoryService.UpdateAsync(CategoryId, dto));
+            else return BadRequest(resvalidator.Errors);
+        }
 
         [HttpDelete("categoryId")]
         public async Task<IActionResult> DeletedAsync(long categoryId)
@@ -48,6 +52,6 @@ namespace FastPizza.WepApi.Controllers
 
         [HttpGet("count")]
         public async Task<IActionResult> CountAsync()
-            =>Ok(await _categoryService.CountAsync());
+            => Ok(await _categoryService.CountAsync());
     }
 }

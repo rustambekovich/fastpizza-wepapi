@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FastPizza.Domain.Entities.Categories;
+﻿namespace FastPizza.Domain.Entities.Categories;
 
 public class Category : Auditable
 {

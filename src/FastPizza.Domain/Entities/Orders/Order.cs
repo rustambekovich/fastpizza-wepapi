@@ -1,5 +1,4 @@
 ﻿using FastPizza.Domain.Enums;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FastPizza.Domain.Entities.Orders;
 

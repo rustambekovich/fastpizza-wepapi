@@ -15,4 +15,8 @@
     <ProjectReference Include="..\FastPizza.Domain\FastPizza.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\Products\" />
+  </ItemGroup>
+
 </Project>

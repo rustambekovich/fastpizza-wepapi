@@ -46,10 +46,10 @@ namespace FastPizza.Service.Services.Products
         {
             var resImg = await _repository.GetByIdAsync(id);
             var result = await _repository.DeleteAsync(id);
-            if( result > 0)
+            if (result > 0)
             {
                 var res = await _fileservice.DeleteImageAsync(resImg.ImagePath);
-                if(res)
+                if (res)
                     return true;
                 return false;
             }
@@ -68,16 +68,16 @@ namespace FastPizza.Service.Services.Products
             return result;
         }
 
-        public async Task<bool> UpdateAsync(long id, ProductCreateDto dto)
+        public async Task<bool> UpdateAsync(long id, ProductUpdateDto dto)
         {
             var resultGetbyId = await _repository.GetByIdAsync(id);
-            if(resultGetbyId is not null)
+            if (resultGetbyId is not null)
             {
                 resultGetbyId.Name = dto.Name;
                 resultGetbyId.Description = dto.Description;
                 resultGetbyId.Unitprice = dto.Unitprice;
                 resultGetbyId.CategoryID = dto.CategoryID;
-                if(resultGetbyId.ImagePath is not null)
+                if (resultGetbyId.ImagePath is not null)
                 {
                     await _fileservice.DeleteImageAsync(resultGetbyId.ImagePath);
                     string newIMG = await _fileservice.UploadImageAsync(dto.Image);

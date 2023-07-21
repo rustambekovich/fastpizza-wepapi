@@ -1,8 +1,7 @@
 ﻿using FastPizza.DataAccess.Utils;
 using FastPizza.Service.Dtos.ProductDtos;
-using FastPizza.Service.Interfaces.Categories;
 using FastPizza.Service.Interfaces.Products;
-using Microsoft.AspNetCore.Http;
+using FastPizza.Service.Validators.Dtos.ProductsValidatories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastPizza.WepApi.Controllers
@@ -22,26 +21,34 @@ namespace FastPizza.WepApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatedAsync([FromForm] ProductCreateDto dto)
         {
-            var result = Ok(await _service.CreateAsync(dto));
-            return Ok(result);
+            var Productvalidator = new ProductCreatatValidator();
+            var validatorResult = Productvalidator.Validate(dto);
+            if (validatorResult.IsValid)
+                return Ok(await _service.CreateAsync(dto));
+            else return BadRequest(validatorResult.Errors);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetALlAsync([FromQuery] int page = 1)
-            =>Ok(await _service.GetAllAsync(new PaginationParams(page, maxSize)));
+            => Ok(await _service.GetAllAsync(new PaginationParams(page, maxSize)));
         [HttpGet("productId")]
         public async Task<IActionResult> GetByIdAsync(long id)
-            =>Ok(await _service.GetByIdAsync(id));
+            => Ok(await _service.GetByIdAsync(id));
 
         [HttpDelete("productId")]
         public async Task<IActionResult> DeleteByIdAsync(long id)
-            =>Ok( await _service.DeleteAsync(id));
+            => Ok(await _service.DeleteAsync(id));
 
         [HttpGet("count")]
         public async Task<IActionResult> CountAsync()
-            =>Ok(await _service.CountAsync());
+            => Ok(await _service.CountAsync());
         [HttpPut("productId")]
-        public async Task<IActionResult> UpdatedAsync(long id, [FromForm] ProductCreateDto dto)
-            => Ok(await _service.UpdateAsync(id, dto));
+        public async Task<IActionResult> UpdatedAsync(long id, [FromForm] ProductUpdateDto dto)
+        {
+            var Productvalidator = new ProductValidatorUpdate();
+            var validatorResult = Productvalidator.Validate(dto);
+            if (validatorResult.IsValid) return Ok(await _service.UpdateAsync(id, dto));
+            else return BadRequest(validatorResult.Errors);
+        }
     }
 }

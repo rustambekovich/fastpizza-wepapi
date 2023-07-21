@@ -9,7 +9,7 @@ public class FileService : IFileService
 {
     private readonly string MEDIA = "media";
     private readonly string IMAGES = "images";
-   // private readonly string AVATARS = "avatars";
+    // private readonly string AVATARS = "avatars";
     private readonly string ROOTPATH;
     public FileService(IWebHostEnvironment env)
     {

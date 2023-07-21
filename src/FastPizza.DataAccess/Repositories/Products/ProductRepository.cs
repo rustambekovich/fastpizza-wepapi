@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using FastPizza.DataAccess.Interfaces.Products;
 using FastPizza.DataAccess.Utils;
-using FastPizza.Domain.Entities.Categories;
 using FastPizza.Domain.Entities.Products;
 using static Dapper.SqlMapper;
 
@@ -94,7 +93,7 @@ public class ProductRepository : BaseRepository, IProductRepository
         {
             await _connection.OpenAsync();
             string query = $"Select * from  public.products where id = @Id";
-            var result = await _connection.QuerySingleAsync<Product>(query, new {Id = id});
+            var result = await _connection.QuerySingleAsync<Product>(query, new { Id = id });
             return result;
         }
         catch

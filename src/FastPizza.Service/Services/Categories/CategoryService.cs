@@ -6,11 +6,6 @@ using FastPizza.Service.Commons.Helper;
 using FastPizza.Service.Dtos.CategoryDtos;
 using FastPizza.Service.Interfaces.Categories;
 using FastPizza.Service.Interfaces.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FastPizza.Service.Services.Categories
 {
@@ -27,7 +22,7 @@ namespace FastPizza.Service.Services.Categories
         public async Task<long> CountAsync()
         {
             var result = await _repository.CountAsync();
-           
+
             return result;
         }
 
@@ -40,8 +35,8 @@ namespace FastPizza.Service.Services.Categories
                 Description = dto.Description,
                 ImagePath = imagePath,
                 CreatedAt = TimeHelper.GetDateTime(),
-                UpdatedAt= TimeHelper.GetDateTime(),
-                
+                UpdatedAt = TimeHelper.GetDateTime(),
+
             };
             var result = await _repository.CreateAsync(category);
             return result > 0;
@@ -53,7 +48,7 @@ namespace FastPizza.Service.Services.Categories
             if (res is null)
                 throw new CategoryNotFoundException();
             var result = await _repository.DeleteAsync(id);
-            if(result > 0)
+            if (result > 0)
             {
                 await _fileService.DeleteImageAsync(res.ImagePath);
                 return true;
@@ -63,23 +58,23 @@ namespace FastPizza.Service.Services.Categories
 
         public async Task<List<Category>> GetAllAsync(PaginationParams @params)
         {
-           var result = await _repository.GetAllAsync(@params);
-           if (result is  null)
-               throw new CategoryNotFoundException();
+            var result = await _repository.GetAllAsync(@params);
+            if (result is null)
+                throw new CategoryNotFoundException();
             return result.ToList();
         }
 
-        
+
 
         public async Task<Category?> GetByIdAsync(long id)
         {
             var result = await _repository.GetByIdAsync(id);
-            if (result is  null)
+            if (result is null)
                 throw new CategoryNotFoundException();
             return result;
         }
 
-        public async Task<bool> UpdateAsync(long id, CategoryCreateDto dto)
+        public async Task<bool> UpdateAsync(long id, CategotryUpdatedDto dto)
         {
             var result = await _repository.GetByIdAsync(id);
             if (result is not null)
@@ -88,7 +83,7 @@ namespace FastPizza.Service.Services.Categories
             {
                 result.Name = dto.Name;
                 result.Description = dto.Description;
-                if(dto.ImagePath != null)
+                if (dto.ImagePath != null)
                 {
                     await _fileService.DeleteImageAsync(result.ImagePath);
                     string newPath = await _fileService.UploadImageAsync(dto.ImagePath);

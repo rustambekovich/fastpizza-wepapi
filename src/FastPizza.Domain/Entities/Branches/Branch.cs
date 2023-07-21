@@ -1,6 +1,6 @@
 ﻿namespace FastPizza.Domain.Entities.Branches
 {
-    public class Branch :Auditable
+    public class Branch : Auditable
     {
         public string Name { get; set; } = string.Empty;
         public float Latitude { get; set; }
