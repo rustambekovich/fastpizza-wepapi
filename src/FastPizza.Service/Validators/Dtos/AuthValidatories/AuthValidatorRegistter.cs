@@ -8,10 +8,10 @@ public class AuthValidatorRegistter : AbstractValidator<RegistrDto>
 {
 	public AuthValidatorRegistter()
 	{
-        RuleFor(dto => dto.FirstName).NotNull().NotEmpty().WithMessage("Firstname is required!")
+        RuleFor(dto => dto.FullName).NotNull().NotEmpty().WithMessage("Firstname is required!")
             .MaximumLength(30).WithMessage("Firstname must be less than 30 characters");
 
-        RuleFor(dto => dto.LastName).NotNull().NotEmpty().WithMessage("Lastname is required!")
-            .MaximumLength(30).WithMessage("Lastname must be less than 30 characters");
+        /*RuleFor(dto => dto.LastName).NotNull().NotEmpty().WithMessage("Lastname is required!")
+            .MaximumLength(30).WithMessage("Lastname must be less than 30 characters");*/
     }
 }

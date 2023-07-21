@@ -7,10 +7,12 @@ using FastPizza.DataAccess.Repositories.Products;
 using FastPizza.Service.Interfaces.Auth;
 using FastPizza.Service.Interfaces.Categories;
 using FastPizza.Service.Interfaces.Common;
+using FastPizza.Service.Interfaces.Notifications;
 using FastPizza.Service.Interfaces.Products;
 using FastPizza.Service.Services.Auth;
 using FastPizza.Service.Services.Categories;
 using FastPizza.Service.Services.Common;
+using FastPizza.Service.Services.Notification;
 using FastPizza.Service.Services.Products;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +35,7 @@ builder.Services.AddScoped<IProductServise, ProductServise>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IEmailsender, EmailSender>();
 
 
 

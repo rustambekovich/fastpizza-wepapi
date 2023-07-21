@@ -1,5 +1,6 @@
 ﻿using FastPizza.Service.Dtos.Auth;
 using FastPizza.Service.Interfaces.Auth;
+using FastPizza.Service.Services.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,18 @@ namespace FastPizza.WepApi.Controllers
         {
             var result = await _authservice.SendCodeForRegisterAsync(email);
             return Ok( new { result.Result, result.CachedVerificationMinutes });
+        }
+
+        [HttpPost("register/verify")]
+      /*  public async Task<IActionResult> s([FromForm] VerifyRegisterDto registrDto)
+        {
+
+        }*/
+
+        public async Task<IActionResult> VerifyRegisterAsync([FromBody] VerifyRegisterDto verifyRegisterDto)
+        {
+            var serviceResult = await _authservice.VerifyRegisterAsync(verifyRegisterDto.Email, verifyRegisterDto.Code);
+            return Ok(new { serviceResult.Result, serviceResult.Token });
         }
     }
 }
