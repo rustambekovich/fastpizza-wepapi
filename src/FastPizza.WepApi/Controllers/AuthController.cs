@@ -21,5 +21,12 @@ namespace FastPizza.WepApi.Controllers
             var result = await _authservice.RegisterAsync(registrDto);
             return Ok( new { result.Result, result.CachedMinutes });
         }
+
+        [HttpPost("register/send-code")]
+        public async Task<IActionResult> SendCodeRegisterAsync( string email)
+        {
+            var result = await _authservice.SendCodeForRegisterAsync(email);
+            return Ok( new { result.Result, result.CachedVerificationMinutes });
+        }
     }
 }

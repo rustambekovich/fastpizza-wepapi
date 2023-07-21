@@ -1,6 +1,8 @@
 ﻿using FastPizza.DataAccess.Interfaces.Custumers;
 using FastPizza.Domain.Exceptions.Customers;
+using FastPizza.Service.Commons.Helper;
 using FastPizza.Service.Dtos.Auth;
+using FastPizza.Service.Dtos.Security;
 using FastPizza.Service.Interfaces.Auth;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -35,12 +37,28 @@ public class AuthService : IAuthService
         return (Result: true, CachedMinutes: CACHED_FOR_MINUTS_REGISTER);
     }
 
-    public Task<(bool Result, int CachedVerificationMinutes)> SendCodeForRegisterAsync(string phone)
+    public async Task<(bool Result, int CachedVerificationMinutes)> SendCodeForRegisterAsync(string email)
     {
-        throw new NotImplementedException();
+        if(_memoryCache.TryGetValue(email, out RegistrDto registrDto))
+        {
+            VerificationDto verificationDto = new VerificationDto();
+            verificationDto.Attempt = 0;
+            verificationDto.CreatedAt = TimeHelper.GetDateTime();
+            verificationDto.Code = 1234;
+            _memoryCache.Set(email, verificationDto, TimeSpan.FromMinutes(CACHED_FOR_MINUTS_VEFICATION));
+
+            // emal sende begin
+            // emsil sender end 
+
+            return (Result: true, CachedMinutes: CACHED_FOR_MINUTS_VEFICATION);
+        }
+        else
+        {
+            throw new CustomerExpiredException(); 
+        }
     }
 
-    public Task<(bool Result, string Token)> VerifyRegisterAsync(string phone, int code)
+    public Task<(bool Result, string Token)> VerifyRegisterAsync(string email, int code)
     {
         throw new NotImplementedException();
     }
