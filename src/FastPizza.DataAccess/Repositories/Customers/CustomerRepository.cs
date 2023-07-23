@@ -26,8 +26,9 @@ namespace FastPizza.DataAccess.Repositories.Customers
             {
                 await _connection.OpenAsync();
                 string query = "INSERT INTO public.customers(full_name, phone_number, image_path_customer, created_at, updated_at, email) " +
-                    "VALUES (@FullName, @PhoneNnumber, @ImagePathCustomer, @CreatedAt, @UpdatedAt, @Email);";
-                return await _connection.ExecuteAsync(query, entity);
+                    "VALUES (@FullName, @PhoneNumber, @ImagePathCustomer, @CreatedAt, @UpdatedAt, @Email);";
+                var result  = await _connection.ExecuteAsync(query, entity);
+                return result;
             }
             catch
             {
@@ -96,6 +97,26 @@ namespace FastPizza.DataAccess.Repositories.Customers
         public Task<int> UpdateAsync(long id, Customer entity)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Customer?> GetByPhoneAsync(string phone)
+        {
+            try
+            {
+
+                await _connection.OpenAsync();
+                string query = "SELECT * FROM public.customers where phone_number = @PhoneNumber";
+                var data = await _connection.QuerySingleOrDefaultAsync<Customer>(query, new { PhoneNumber = phone });
+                return data;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
         }
     }
 }

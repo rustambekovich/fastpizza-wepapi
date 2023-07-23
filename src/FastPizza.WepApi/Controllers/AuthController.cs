@@ -11,31 +11,43 @@ namespace FastPizza.WepApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authservice;
+        private readonly IAuthServiceSMS _authserviceSMS;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService,
+            IAuthServiceSMS authServiceSMS)
         {
             this._authservice = authService;
+            this._authserviceSMS = authServiceSMS;
         }
         [HttpPost("register")]
+        /// email
+        /* public async Task<IActionResult> RegisterAsync([FromForm] RegistrDto registrDto)
+         {
+             var result = await _authservice.RegisterAsync(registrDto);
+             return Ok(new { result.Result, result.CachedMinutes });
+         }*/
+
+        /// sms
         public async Task<IActionResult> RegisterAsync([FromForm] RegistrDto registrDto)
         {
-            var result = await _authservice.RegisterAsync(registrDto);
-            return Ok( new { result.Result, result.CachedMinutes });
+            var result = await _authserviceSMS.RegisterAsync(registrDto);
+            return Ok(new { result.Result, result.CachedMinutes });
         }
 
         [HttpPost("register/send-code")]
-        public async Task<IActionResult> SendCodeRegisterAsync( string email)
+        /*public async Task<IActionResult> SendCodeRegisterAsync(string email)
         {
             var result = await _authservice.SendCodeForRegisterAsync(email);
-            return Ok( new { result.Result, result.CachedVerificationMinutes });
+            return Ok(new { result.Result, result.CachedVerificationMinutes });
+        }
+*/
+        public async Task<IActionResult> SendCodeRegisterAsync(string phone)
+        {
+            var result = await _authserviceSMS.SendCodeForRegisterAsync(phone);
+            return Ok(new { result.Result, result.CachedVerificationMinutes });
         }
 
         [HttpPost("register/verify")]
-      /*  public async Task<IActionResult> s([FromForm] VerifyRegisterDto registrDto)
-        {
-
-        }*/
-
         public async Task<IActionResult> VerifyRegisterAsync([FromBody] VerifyRegisterDto verifyRegisterDto)
         {
             var serviceResult = await _authservice.VerifyRegisterAsync(verifyRegisterDto.Email, verifyRegisterDto.Code);

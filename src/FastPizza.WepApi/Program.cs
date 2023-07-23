@@ -35,6 +35,8 @@ builder.Services.AddScoped<IProductServise, ProductServise>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthServiceSMS, AuthServiceSMS>();
+builder.Services.AddScoped<IPhoneSender, SmsSender>();
 builder.Services.AddScoped<IEmailsender, EmailSender>();
 
 

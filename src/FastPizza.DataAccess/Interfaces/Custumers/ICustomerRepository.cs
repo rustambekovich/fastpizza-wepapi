@@ -13,5 +13,6 @@ namespace FastPizza.DataAccess.Interfaces.Custumers
         IGetAll<CostumerViewModel>, ISearchable<CostumerViewModel>
     {
         public Task<Customer?> GetByEmailAsync(string email);
+        public Task<Customer?> GetByPhoneAsync(string phone);
     }
 }

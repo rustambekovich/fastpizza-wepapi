@@ -4,6 +4,7 @@ using FastPizza.Domain.Entities.Customers;
 using FastPizza.Domain.Entities.Users;
 using FastPizza.Domain.Exceptions.Auth;
 using FastPizza.Domain.Exceptions.Customers;
+using FastPizza.Service.Common.Helpers;
 using FastPizza.Service.Commons.Helper;
 using FastPizza.Service.Dtos.Auth;
 using FastPizza.Service.Dtos.Notifications;
@@ -37,8 +38,8 @@ public class AuthService : IAuthService
     }
     public async Task<(bool Result, int CachedMinutes)> RegisterAsync(RegistrDto dto)
     {
-        var Costumer = await _customerRepository.GetByEmailAsync(dto.Email);
-        if (Costumer is not null) throw new CustomerAlreadyExsistExcaption(dto.Email);
+        //var Costumer = await _customerRepository.GetByEmailAsync(dto.Email);
+        //if (Costumer is not null) throw new CustomerAlreadyExsistExcaption(dto.Email);
 
         if(_memoryCache.TryGetValue(REGISTER_CACHE_KEY + dto.Email, out RegistrDto registrDto))
         {
@@ -59,7 +60,7 @@ public class AuthService : IAuthService
             VerificationDto verificationDto = new VerificationDto();
             verificationDto.Attempt = 0;
             verificationDto.CreatedAt = TimeHelper.GetDateTime();
-            verificationDto.Code = 1234;
+            verificationDto.Code = CodeGenerator.GenerateRandomNumber();
             _memoryCache.Set(email, verificationDto, TimeSpan.FromMinutes(CACHED_FOR_MINUTS_VEFICATION));
 
             // emal sende begin
@@ -71,7 +72,7 @@ public class AuthService : IAuthService
                 TimeSpan.FromMinutes(CACHED_FOR_MINUTS_VEFICATION));
             // emsil sender end 
             EmailMessage smsMessage = new EmailMessage();
-            smsMessage.Title = "Course Zone";
+            smsMessage.Title = "Fast Pizza";
             smsMessage.Content = "Your verification code : " + verificationDto.Code;
             smsMessage.Recipent = email;
             var result = await _emailSender.SenderAsync(smsMessage);
@@ -121,6 +122,7 @@ public class AuthService : IAuthService
         customer.Email = registerDto.Email;
         customer.CreatedAt = TimeHelper.GetDateTime();
         customer.UpdatedAt = TimeHelper.GetDateTime();
+        customer.PhoneNumber = registerDto.PhoneNumber;
 
 
         var dbResult = await _customerRepository.CreateAsync(customer);
