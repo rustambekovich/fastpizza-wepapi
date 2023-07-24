@@ -7,13 +7,7 @@ using FastPizza.Service.Dtos.Notifications;
 using FastPizza.Service.Dtos.Security;
 using FastPizza.Service.Interfaces.Auth;
 using FastPizza.Service.Interfaces.Notifications;
-using FastPizza.Service.Services.Notification;
 using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FastPizza.Service.Services.Auth
 {
@@ -37,8 +31,10 @@ namespace FastPizza.Service.Services.Auth
         }
         public async Task<(bool Result, int CachedMinutes)> RegisterAsync(RegistrDto dto)
         {
-            var Costumer = await _customerRepository.GetByPhoneAsync(dto.PhoneNumber);
-            if (Costumer is not null) throw new CustomerAlreadyExsistExcaption(dto.PhoneNumber);
+            //var Costumer = await _customerRepository.GetByEmailAsync(dto.Email);
+            var caostumerPhone = await _customerRepository.GetByPhoneAsync(dto.PhoneNumber);
+            if (caostumerPhone is not null)
+                throw new CustomerAlreadyExsistExcaption();
 
             if (_memoryCache.TryGetValue(REGISTER_CACHE_KEY + dto.PhoneNumber, out RegistrDto registrDto))
             {
@@ -70,7 +66,7 @@ namespace FastPizza.Service.Services.Auth
                 _memoryCache.Set(VERIFY_REGISTER_CACHE_KEY + phone, verificationDto,
                     TimeSpan.FromMinutes(CACHED_FOR_MINUTS_VEFICATION));
                 // emsil sender end 
-               
+
                 PhoneMessage phoneMessage = new PhoneMessage();
                 phoneMessage.Title = "Fast Pizza";
                 phoneMessage.Content = "Your verification code : " + verificationDto.Code;

@@ -3,13 +3,6 @@ using FastPizza.DataAccess.Interfaces.Custumers;
 using FastPizza.DataAccess.Utils;
 using FastPizza.DataAccess.ViewModels.Users;
 using FastPizza.Domain.Entities.Customers;
-using FastPizza.Domain.Entities.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FastPizza.DataAccess.Repositories.Customers
 {
@@ -27,7 +20,7 @@ namespace FastPizza.DataAccess.Repositories.Customers
                 await _connection.OpenAsync();
                 string query = "INSERT INTO public.customers(full_name, phone_number, image_path_customer, created_at, updated_at, email) " +
                     "VALUES (@FullName, @PhoneNumber, @ImagePathCustomer, @CreatedAt, @UpdatedAt, @Email);";
-                var result  = await _connection.ExecuteAsync(query, entity);
+                var result = await _connection.ExecuteAsync(query, entity);
                 return result;
             }
             catch
@@ -83,7 +76,7 @@ namespace FastPizza.DataAccess.Repositories.Customers
             throw new NotImplementedException();
         }
 
-        
+
         public Task<CostumerViewModel?> GetByIdAsync(long id)
         {
             throw new NotImplementedException();

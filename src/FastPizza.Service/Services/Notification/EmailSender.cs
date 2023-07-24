@@ -1,10 +1,8 @@
 ﻿using FastPizza.Service.Dtos.Notifications;
 using FastPizza.Service.Interfaces.Notifications;
-using System.Net.Mail;
-using MailKit.Net.Smtp;
+using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MimeKit.Text;
-using Microsoft.Extensions.Configuration;
 
 namespace FastPizza.Service.Services.Notification;
 

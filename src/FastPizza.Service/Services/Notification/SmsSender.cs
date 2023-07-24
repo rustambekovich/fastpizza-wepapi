@@ -2,7 +2,6 @@
 using FastPizza.Service.Interfaces.Notifications;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System.Net;
 
 namespace FastPizza.Service.Services.Notification;
