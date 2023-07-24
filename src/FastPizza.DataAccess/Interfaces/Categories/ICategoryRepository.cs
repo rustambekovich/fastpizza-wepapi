@@ -1,4 +1,4 @@
-﻿using AgileShop.DataAccess.Common.Interfaces;
+﻿
 using FastPizza.Domain.Entities.Categories;
 
 namespace FastPizza.DataAccess.Interfaces.Categories

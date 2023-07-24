@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\media\avatars\" />
+    <Folder Include="wwwroot\media\images\" />
   </ItemGroup>
 
 </Project>

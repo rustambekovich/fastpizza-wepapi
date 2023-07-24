@@ -2,6 +2,7 @@
 using FastPizza.DataAccess.Interfaces.Custumers;
 using FastPizza.DataAccess.Utils;
 using FastPizza.DataAccess.ViewModels.Users;
+using FastPizza.Domain.Entities.Categories;
 using FastPizza.Domain.Entities.Customers;
 
 namespace FastPizza.DataAccess.Repositories.Customers
@@ -71,15 +72,45 @@ namespace FastPizza.DataAccess.Repositories.Customers
         }
 
 
-        public Task<IList<CostumerViewModel>> GetAllAsync(PaginationParams @params)
+        public async Task<IList<CostumerViewModel>> GetAllAsync(PaginationParams @params)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _connection.OpenAsync();
+                string query = "Select * from public.categories order by id desc " +
+                    $"offset {@params.GetSkipCount()} limit {@params.PageSize}";
+                var result = (await _connection.QueryAsync<CostumerViewModel>(query)).ToList();
+                return result;
+            }
+            catch
+            {
+                IList<CostumerViewModel> result = new List<CostumerViewModel>();
+                return result;
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
         }
 
 
-        public Task<CostumerViewModel?> GetByIdAsync(long id)
+        public async Task<CostumerViewModel?> GetByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _connection.OpenAsync();
+                string query = "SELECT * FROM public.customers where id = @Id;";
+                var data = await _connection.QuerySingleOrDefaultAsync<CostumerViewModel>(query, new { Id = id });
+                return data;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
         }
 
         public Task<(int ItemsCount, IList<CostumerViewModel>)> SearchAsync(string search, PaginationParams @params)

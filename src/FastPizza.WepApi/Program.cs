@@ -36,11 +36,20 @@ builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthServiceSMS, AuthServiceSMS>();
-builder.Services.AddScoped<IPhoneSender, SmsSender>();
+builder.Services.AddSingleton<IPhoneSender, SmsSender>();
 builder.Services.AddScoped<IEmailsender, EmailSender>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 
-
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("MyPolicy", config =>
+    {
+        config.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
 
 //->
 
@@ -52,9 +61,9 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("MyPolicy");
 app.UseHttpsRedirection();
-
+app.UseStaticFiles();
 app.UseAuthorization();
 
 app.MapControllers();
