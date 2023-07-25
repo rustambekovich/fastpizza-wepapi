@@ -2,6 +2,7 @@
 using FastPizza.Service.Dtos.ProductDtos;
 using FastPizza.Service.Interfaces.Products;
 using FastPizza.Service.Validators.Dtos.ProductsValidatories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastPizza.WepApi.Controllers
@@ -29,20 +30,30 @@ namespace FastPizza.WepApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+
         public async Task<IActionResult> GetALlAsync([FromQuery] int page = 1)
             => Ok(await _service.GetAllAsync(new PaginationParams(page, maxSize)));
         [HttpGet("productId")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> GetByIdAsync(long id)
             => Ok(await _service.GetByIdAsync(id));
 
         [HttpDelete("productId")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> DeleteByIdAsync(long id)
             => Ok(await _service.DeleteAsync(id));
 
         [HttpGet("count")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> CountAsync()
             => Ok(await _service.CountAsync());
         [HttpPut("productId")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> UpdatedAsync(long id, [FromForm] ProductUpdateDto dto)
         {
             var Productvalidator = new ProductValidatorUpdate();

@@ -39,7 +39,7 @@ public class AuthService : IAuthService
     {
         var Costumer = await _customerRepository.GetByEmailAsync(dto.Email);
         var caostumerPhone = await _customerRepository.GetByPhoneAsync(dto.PhoneNumber);
-        if (Costumer is not null || caostumerPhone is not null) 
+        if (Costumer is not null || caostumerPhone is not null)
             throw new CustomerAlreadyExsistExcaption(dto.Email);
 
         if (_memoryCache.TryGetValue(REGISTER_CACHE_KEY + dto.Email, out RegistrDto registrDto))
@@ -128,4 +128,6 @@ public class AuthService : IAuthService
         var dbResult = await _customerRepository.CreateAsync(customer);
         return dbResult > 0;
     }
+
+
 }

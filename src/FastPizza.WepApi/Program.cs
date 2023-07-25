@@ -61,11 +61,11 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors("MyPolicy");
 app.UseHttpsRedirection();
+app.UseCors("MyPolicy");
 app.UseStaticFiles();
 app.UseAuthorization();
-
+app.UseDeveloperExceptionPage();
 app.MapControllers();
 
 app.Run();

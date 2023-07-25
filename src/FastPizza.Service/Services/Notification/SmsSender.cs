@@ -16,10 +16,10 @@ public class SmsSender : IPhoneSender
     private string TOKEN = "";
     public SmsSender(IConfiguration config)
     {
-        BASE_URL = config["Sms:BaseURL"]!;
-        SENDER = config["Sms:Sender"]!;
-        EMAIL = config["Sms:Email"]!;
-        PASSWORD = config["Sms:Password"]!;
+        BASE_URL = "https://notify.eskiz.uz"!;
+        SENDER = "4546"!;
+        EMAIL = "muhammadqodir5050@gmail.com"!;
+        PASSWORD = "QDqQqURWM61MyKuZehpBW5cbeo5dSvKX1lVeql9O"!;
     }
     private async Task LoginAsync()
     {

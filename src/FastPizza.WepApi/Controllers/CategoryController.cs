@@ -2,6 +2,7 @@
 using FastPizza.Service.Dtos.CategoryDtos;
 using FastPizza.Service.Interfaces.Categories;
 using FastPizza.Service.Validators.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastPizza.WepApi.Controllers
@@ -19,6 +20,8 @@ namespace FastPizza.WepApi.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
+
         public async Task<IActionResult> CreateAsync([FromForm] CategoryCreateDto dto)
         {
             var categoryvalidator = new CategoryValidator();
@@ -30,14 +33,20 @@ namespace FastPizza.WepApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+
         public async Task<IActionResult> GetAllAsync([FromQuery] int page = 1)
             => Ok(await _categoryService.GetAllAsync(new PaginationParams(page, maxPageSize)));
 
         [HttpGet("categoryId")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> GetById(long categoryId)
             => Ok(await _categoryService.GetByIdAsync(categoryId));
 
         [HttpPut("categoryId")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> UpdateAsync(long CategoryId, [FromForm] CategotryUpdatedDto dto)
         {
             var varcategoryUp = new CategoryValidtorUpdate();
@@ -47,10 +56,14 @@ namespace FastPizza.WepApi.Controllers
         }
 
         [HttpDelete("categoryId")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> DeletedAsync(long categoryId)
             => Ok(await _categoryService.DeleteAsync(categoryId));
 
         [HttpGet("count")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> CountAsync()
             => Ok(await _categoryService.CountAsync());
     }

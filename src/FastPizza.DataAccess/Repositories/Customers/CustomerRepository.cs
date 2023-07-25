@@ -2,7 +2,6 @@
 using FastPizza.DataAccess.Interfaces.Custumers;
 using FastPizza.DataAccess.Utils;
 using FastPizza.DataAccess.ViewModels.Users;
-using FastPizza.Domain.Entities.Categories;
 using FastPizza.Domain.Entities.Customers;
 
 namespace FastPizza.DataAccess.Repositories.Customers
@@ -127,7 +126,11 @@ namespace FastPizza.DataAccess.Repositories.Customers
         {
             try
             {
+                if (_connection.State == System.Data.ConnectionState.Open)
+                {
+                    await _connection.CloseAsync();
 
+                }
                 await _connection.OpenAsync();
                 string query = "SELECT * FROM public.customers where phone_number = @PhoneNumber";
                 var data = await _connection.QuerySingleOrDefaultAsync<Customer>(query, new { PhoneNumber = phone });

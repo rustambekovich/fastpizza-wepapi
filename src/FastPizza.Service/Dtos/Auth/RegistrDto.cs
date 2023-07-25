@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace FastPizza.Service.Dtos.Auth
+﻿namespace FastPizza.Service.Dtos.Auth
 {
     public class RegistrDto
     {

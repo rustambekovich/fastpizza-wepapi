@@ -1,5 +1,4 @@
-﻿using FastPizza.Service.Dtos.Auth;
-public class VerifyRegisterDto
+﻿public class VerifyRegisterDto
 {
     public string Email { get; set; } = String.Empty;
 
