@@ -18,8 +18,8 @@ public class SmsSender : IPhoneSender
     {
         BASE_URL = "https://notify.eskiz.uz"!;
         SENDER = "4546"!;
-        EMAIL = "rajabboyevmirshod@gmail.com"!;
-        PASSWORD = "vugXFlJ7du1Gw4e0Q6i9x3XBHqBy6k4cbLYnuqne"!;
+        EMAIL = "able.devops@gmail.com"!;
+        PASSWORD = "3nUhur3fB9hiFZZAbBAHJ5fRaik0oTsamS8w6En9"!;
     }
     private async Task LoginAsync()
     {
