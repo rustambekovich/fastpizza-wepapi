@@ -40,7 +40,6 @@ builder.Services.AddSingleton<IPhoneSender, SmsSender>();
 builder.Services.AddScoped<IEmailsender, EmailSender>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
-
 builder.Services.AddCors(option =>
 {
     option.AddPolicy("MyPolicy", config =>

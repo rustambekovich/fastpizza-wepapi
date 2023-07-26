@@ -77,7 +77,7 @@ namespace FastPizza.Service.Services.Categories
         public async Task<bool> UpdateAsync(long id, CategotryUpdatedDto dto)
         {
             var result = await _repository.GetByIdAsync(id);
-            if (result is not null)
+            if (result is null)
                 throw new CategoryNotFoundException();
             if (result != null)
             {

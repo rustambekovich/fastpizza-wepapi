@@ -26,10 +26,10 @@ namespace FastPizza.Service.Services.Auth
             new Claim(ClaimTypes.MobilePhone, customer.PhoneNumber)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["SecurityKey"]!));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("de812cfb-5aec-4c72-8c42-b506efa878d2"!));
             var keyCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            int expiresHours = int.Parse(_config["Lifetime"]!);
+            int expiresHours = 24;
             var token = new JwtSecurityToken(
                 issuer: _config["Issuer"],
                 audience: _config["Audience"],

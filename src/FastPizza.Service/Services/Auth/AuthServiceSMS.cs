@@ -97,6 +97,7 @@ namespace FastPizza.Service.Services.Auth
                     {
                         var dbResult = await RegisterToDatabaseAsync(registerDto);
                         var result = await _customerRepository.GetByPhoneAsync(phone);
+
                         if (result is null) throw new CustomerNotFoundException();
 
                         string token = _tokenservice.GenereateToken(result);
