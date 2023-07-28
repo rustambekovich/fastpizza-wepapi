@@ -14,6 +14,7 @@ namespace FastPizza.Service.Validators.Dtos.AuthValidatories
         {
             RuleFor(dto => dto.PhoneNumber).Must(phone => PhoneNumberValidator.IsValid(phone))
             .WithMessage("Phone number is invalid! ex: +998xxYYYAABB");
+
         }
     }
 }

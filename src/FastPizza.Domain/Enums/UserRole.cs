@@ -2,7 +2,6 @@
 {
     public enum UserRole
     {
-        Menenjer,
-        Admin
+        Admin = 1, User = 0
     }
 }

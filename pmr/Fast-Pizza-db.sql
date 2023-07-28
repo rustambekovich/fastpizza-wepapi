@@ -47,7 +47,7 @@ CREATE TABLE users
     was_born text NOT NULL,
     password_hash text NOT NULL,
     salt text NOT NULL,
-    image_path text NOT NULL,
+    image_path text,
     identity_role text NOT NULL,
     created_at timestamp without time zone default now(),
     updated_at timestamp without time zone default now()

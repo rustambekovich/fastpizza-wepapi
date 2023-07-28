@@ -2,7 +2,9 @@
 using FastPizza.Service.Dtos.BranchDto;
 using FastPizza.Service.Interfaces.Branches;
 using FastPizza.Service.Validators.Dtos.BranchValidatories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace FastPizza.WepApi.Controllers
 {
@@ -23,6 +25,7 @@ namespace FastPizza.WepApi.Controllers
             =>Ok( await _branchService.CountAsync());
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreatAsync([FromForm] BranchCreatDto dto)
         {
             var branchvalidator = new BranchValidator();
@@ -44,10 +47,12 @@ namespace FastPizza.WepApi.Controllers
             =>Ok( await _branchService.GetByIdAsync(id));
 
         [HttpDelete("branchId")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAsync(long id)
             => Ok( await _branchService.DeleteAsync(id));
 
         [HttpPut("branchId")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateAsync(long id, [FromForm] BranchCreatDto dto)
         {
             var branchvalidator = new BranchValidator();

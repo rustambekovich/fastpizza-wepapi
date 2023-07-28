@@ -4,6 +4,7 @@ using FastPizza.Service.Validators.Dtos;
 using FastPizza.Service.Validators.Dtos.AuthValidatories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Numerics;
 
 namespace FastPizza.WepApi.Controllers
 {
@@ -37,6 +38,8 @@ namespace FastPizza.WepApi.Controllers
         {
             var validaor = new AuthValidatorRegistter();
             var resvalid = validaor.Validate(registrDto);
+            var res = EmailValidator.IsValid(registrDto.Email);
+            if (res == false) return BadRequest("Email is invalid!");
             if (resvalid.IsValid)
             {
                 var result = await _authserviceSMS.RegisterAsync(registrDto);
@@ -94,6 +97,8 @@ namespace FastPizza.WepApi.Controllers
         [HttpPost("login/verify")]
         public async Task<IActionResult> VerifyLoginByPhoneAsync([FromBody] LoginDto dto)
         {
+            var res = PhoneNumberValidator.IsValid(dto.PhoneNumber);
+            if (res == false) return BadRequest("Phone number is invalid!");
             var serviceResult = await _authserviceSMS.VerifyLoginAsync(dto.PhoneNumber, dto.code);
             return Ok(new { serviceResult.Result, serviceResult.Token });
         }

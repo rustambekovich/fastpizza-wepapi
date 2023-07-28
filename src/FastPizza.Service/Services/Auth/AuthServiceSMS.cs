@@ -71,6 +71,15 @@ namespace FastPizza.Service.Services.Auth
                     TimeSpan.FromMinutes(CACHED_FOR_MINUTS_VEFICATION));
                 // emsil sender end 
 
+                //---------------------
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                HttpClient client = new HttpClient(clientHandler);
+
+
+                //---------------------
                 PhoneMessage phoneMessage = new PhoneMessage();
                 phoneMessage.Title = "Fast Pizza";
                 phoneMessage.Content = "Your verification code : " + verificationDto.Code;

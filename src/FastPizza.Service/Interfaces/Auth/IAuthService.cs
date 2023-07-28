@@ -1,4 +1,5 @@
-﻿using FastPizza.Service.Dtos.Auth;
+﻿
+using FastPizza.Service.Dtos.Auth;
 
 namespace FastPizza.Service.Interfaces.Auth
 {

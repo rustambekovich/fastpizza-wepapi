@@ -20,6 +20,7 @@ namespace FastPizza.WepApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreatedAsync([FromForm] ProductCreateDto dto)
         {
             var Productvalidator = new ProductCreatatValidator();
@@ -41,7 +42,7 @@ namespace FastPizza.WepApi.Controllers
             => Ok(await _service.GetByIdAsync(id));
 
         [HttpDelete("productId")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
 
         public async Task<IActionResult> DeleteByIdAsync(long id)
             => Ok(await _service.DeleteAsync(id));
@@ -51,8 +52,9 @@ namespace FastPizza.WepApi.Controllers
 
         public async Task<IActionResult> CountAsync()
             => Ok(await _service.CountAsync());
+
         [HttpPut("productId")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
 
         public async Task<IActionResult> UpdatedAsync(long id, [FromForm] ProductUpdateDto dto)
         {

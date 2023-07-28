@@ -45,7 +45,7 @@ namespace FastPizza.WepApi.Controllers
             => Ok(await _categoryService.GetByIdAsync(categoryId));
 
         [HttpPut("categoryId")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
 
         public async Task<IActionResult> UpdateAsync(long CategoryId, [FromForm] CategotryUpdatedDto dto)
         {
@@ -56,7 +56,7 @@ namespace FastPizza.WepApi.Controllers
         }
 
         [HttpDelete("categoryId")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
 
         public async Task<IActionResult> DeletedAsync(long categoryId)
             => Ok(await _categoryService.DeleteAsync(categoryId));
