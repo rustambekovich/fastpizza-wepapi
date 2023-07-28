@@ -69,6 +69,7 @@ builder.Services.AddCors(option =>
 });
 
 //->
+builder.ConfigureJwtAuth();
 builder.ConfigureSwaggerAuth();
 var app = builder.Build();
 
@@ -81,6 +82,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 app.UseHttpsRedirection();
 app.UseCors("MyPolicy");
 app.UseStaticFiles();
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseDeveloperExceptionPage();
 app.MapControllers();
