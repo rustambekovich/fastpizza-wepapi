@@ -12,6 +12,7 @@ using FastPizza.Service.Interfaces.Auth;
 using FastPizza.Service.Interfaces.Branches;
 using FastPizza.Service.Interfaces.Categories;
 using FastPizza.Service.Interfaces.Common;
+using FastPizza.Service.Interfaces.Customeries;
 using FastPizza.Service.Interfaces.Notifications;
 using FastPizza.Service.Interfaces.Products;
 using FastPizza.Service.Interfaces.UserAuth;
@@ -20,6 +21,7 @@ using FastPizza.Service.Services.Auth;
 using FastPizza.Service.Services.Btanches;
 using FastPizza.Service.Services.Categories;
 using FastPizza.Service.Services.Common;
+using FastPizza.Service.Services.Customeries;
 using FastPizza.Service.Services.Notification;
 using FastPizza.Service.Services.Products;
 using FastPizza.Service.Services.UserAuthService;
@@ -43,6 +45,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IBranchRepository, BranchRepository>();
 builder.Services.AddScoped<IUser, UserRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 
 builder.Services.AddScoped<IProductServise, ProductServise>();
@@ -58,6 +61,7 @@ builder.Services.AddScoped<IAuthUserServiceSMS, UserAuthServiceSMS>();
 builder.Services.AddScoped<IBranchService, BranchService>();
 builder.Services.AddScoped<IUserservice, UserService>();
 builder.Services.AddScoped<IPaginator, Paginator>();
+builder.Services.AddScoped<ICustomer, CustomerService>();
 
 builder.Services.AddCors(option =>
 {

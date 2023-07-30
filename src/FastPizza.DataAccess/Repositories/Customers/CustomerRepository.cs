@@ -8,9 +8,22 @@ namespace FastPizza.DataAccess.Repositories.Customers
 {
     public class CustomerRepository : BaseRepository, ICustomerRepository
     {
-        public Task<long> CountAsync()
+        public async Task<long> CountAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _connection.OpenAsync();
+                string query = $"Select Count(*) from public.customers";
+                return await _connection.ExecuteScalarAsync<long>(query);
+            }
+            catch
+            {
+                return 0;
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
         }
 
         public async Task<int> CreateAsync(Customer entity)
@@ -71,19 +84,19 @@ namespace FastPizza.DataAccess.Repositories.Customers
         }
 
 
-        public async Task<IList<CostumerViewModel>> GetAllAsync(PaginationParams @params)
+        public async Task<IList<Customer>> GetAllAsync(PaginationParams @params)
         {
             try
             {
                 await _connection.OpenAsync();
                 string query = "Select * from public.categories order by id desc " +
                     $"offset {@params.GetSkipCount()} limit {@params.PageSize}";
-                var result = (await _connection.QueryAsync<CostumerViewModel>(query)).ToList();
-                return result;
+                var result = (await _connection.QueryAsync<Customer>(query)).ToList();
+                return result.ToList() ;
             }
             catch
             {
-                IList<CostumerViewModel> result = new List<CostumerViewModel>();
+                IList<Customer> result = new List<Customer>();
                 return result;
             }
             finally
@@ -93,13 +106,13 @@ namespace FastPizza.DataAccess.Repositories.Customers
         }
 
 
-        public async Task<CostumerViewModel?> GetByIdAsync(long id)
+        public async Task<Customer?> GetByIdAsync(long id)
         {
             try
             {
                 await _connection.OpenAsync();
                 string query = "SELECT * FROM public.customers where id = @Id;";
-                var data = await _connection.QuerySingleOrDefaultAsync<CostumerViewModel>(query, new { Id = id });
+                var data = await _connection.QuerySingleOrDefaultAsync<Customer>(query, new { Id = id });
                 return data;
             }
             catch
@@ -112,14 +125,30 @@ namespace FastPizza.DataAccess.Repositories.Customers
             }
         }
 
-        public Task<(int ItemsCount, IList<CostumerViewModel>)> SearchAsync(string search, PaginationParams @params)
+        public Task<(int ItemsCount, IList<Customer>)> SearchAsync(string search, PaginationParams @params)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> UpdateAsync(long id, Customer entity)
+        public async Task<int> UpdateAsync(long id, Customer entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _connection.OpenAsync();
+                string query = "UPDATE public.categories " +
+                                "SET  full_name = @FullName, phone_number = @PhoneNumber, image_path_customer = @ImagePathCustomer, email = @Email,  updated_at = @UpdatedAt" +
+                               $" WHERE id = {id};";
+                var result = await _connection.ExecuteAsync(query, entity);
+                return result;
+            }
+            catch
+            {
+                return 0;
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
         }
 
         public async Task<Customer?> GetByPhoneAsync(string phone)
