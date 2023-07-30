@@ -89,7 +89,7 @@ namespace FastPizza.DataAccess.Repositories.Customers
             try
             {
                 await _connection.OpenAsync();
-                string query = "Select * from public.categories order by id desc " +
+                string query = "Select * from public.customers order by id desc " +
                     $"offset {@params.GetSkipCount()} limit {@params.PageSize}";
                 var result = (await _connection.QueryAsync<Customer>(query)).ToList();
                 return result.ToList() ;
@@ -135,7 +135,7 @@ namespace FastPizza.DataAccess.Repositories.Customers
             try
             {
                 await _connection.OpenAsync();
-                string query = "UPDATE public.categories " +
+                string query = "UPDATE public.customers " +
                                 "SET  full_name = @FullName, phone_number = @PhoneNumber, image_path_customer = @ImagePathCustomer, email = @Email,  updated_at = @UpdatedAt" +
                                $" WHERE id = {id};";
                 var result = await _connection.ExecuteAsync(query, entity);
