@@ -11,11 +11,13 @@ namespace FastPizza.Service.Services.Categories
 {
     public class CategoryService : ICategoryService
     {
+        private readonly IPaginator _paginator;
         private readonly ICategoryRepository _repository;
         private readonly IFileService _fileService;
         public CategoryService(ICategoryRepository categoryRepository,
-            IFileService fileService)
+            IFileService fileService, IPaginator paginator)
         {
+            this._paginator = paginator;
             this._repository = categoryRepository;
             this._fileService = fileService;
         }
@@ -61,6 +63,8 @@ namespace FastPizza.Service.Services.Categories
             var result = await _repository.GetAllAsync(@params);
             if (result is null)
                 throw new CategoryNotFoundException();
+            var count = await _repository.CountAsync();
+            _paginator.Paginate(count, @params);
             return result.ToList();
         }
 

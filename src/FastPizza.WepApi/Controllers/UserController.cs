@@ -14,7 +14,7 @@ namespace FastPizza.WepApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserservice _servise;
-        private readonly int maxsize = 30;
+        private readonly int maxsize = 3;
 
         public UserController(IUserservice userservice)
         {
@@ -26,6 +26,7 @@ namespace FastPizza.WepApi.Controllers
             => Ok(await _servise.CountAsync());
 
         [HttpGet]
+        [Authorize(Roles = "Admin")] 
         public async Task<IActionResult> GetAllAsync([FromQuery] int page = 1)
             => Ok(await _servise.GetAllAsync(new PaginationParams(page, maxsize)));
 

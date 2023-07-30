@@ -1,6 +1,6 @@
 ﻿using FastPizza.DataAccess.Utils;
 
-namespace FastPizza.Service.Common.Helpers;
+namespace FastPizza.Service.Interfaces.Common;
 
 
 public interface IPaginator

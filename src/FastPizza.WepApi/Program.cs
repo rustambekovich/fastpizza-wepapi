@@ -57,6 +57,7 @@ builder.Services.AddScoped<ITokenUserService, UserTokenService>();
 builder.Services.AddScoped<IAuthUserServiceSMS, UserAuthServiceSMS>();
 builder.Services.AddScoped<IBranchService, BranchService>();
 builder.Services.AddScoped<IUserservice, UserService>();
+builder.Services.AddScoped<IPaginator, Paginator>();
 
 builder.Services.AddCors(option =>
 {

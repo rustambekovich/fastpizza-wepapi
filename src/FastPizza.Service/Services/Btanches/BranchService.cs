@@ -5,15 +5,19 @@ using FastPizza.Domain.Exceptions.Branches;
 using FastPizza.Service.Commons.Helper;
 using FastPizza.Service.Dtos.BranchDto;
 using FastPizza.Service.Interfaces.Branches;
+using FastPizza.Service.Interfaces.Common;
 
 namespace FastPizza.Service.Services.Btanches
 {
     public class BranchService : IBranchService
     {
+        private readonly IPaginator _Paginatr;
         private readonly IBranchRepository _branchRepository;
 
-        public BranchService(IBranchRepository branchRepository)
+        public BranchService(IBranchRepository branchRepository,
+            IPaginator paginator)
         {
+            this._Paginatr = paginator;
             this._branchRepository = branchRepository;
         }
         public async Task<long> CountAsync()
@@ -63,6 +67,8 @@ namespace FastPizza.Service.Services.Btanches
             {
                 throw new BrenchNotFoundException();
             }
+            var count = await _branchRepository.CountAsync();
+            _Paginatr.Paginate(count, PaginationParams);
             return result.ToList();
         }
 

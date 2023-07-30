@@ -12,7 +12,7 @@ namespace FastPizza.WepApi.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductServise _service;
-        private readonly int maxSize = 30;
+        private readonly int maxSize = 3;
 
         public ProductController(IProductServise service)
         {

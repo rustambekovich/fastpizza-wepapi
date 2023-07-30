@@ -5,17 +5,20 @@ using FastPizza.Service.Commons.Helper;
 using FastPizza.Service.Dtos.ProductDtos;
 using FastPizza.Service.Interfaces.Common;
 using FastPizza.Service.Interfaces.Products;
+using FastPizza.Service.Services.Common;
 
 namespace FastPizza.Service.Services.Products
 {
     public class ProductServise : IProductServise
     {
+        private IPaginator _paginator;
         private IProductRepository _repository;
         private IFileService _fileservice;
 
         public ProductServise(IProductRepository repository,
-            IFileService fileService)
+            IFileService fileService, IPaginator paginator)
         {
+            this._paginator = paginator;
             this._repository = repository;
             this._fileservice = fileService;
         }
@@ -59,6 +62,8 @@ namespace FastPizza.Service.Services.Products
         public async Task<IList<Product>> GetAllAsync(PaginationParams PaginationParams)
         {
             var result = await _repository.GetAllAsync(PaginationParams);
+            var count = await _repository.CountAsync();
+            _paginator.Paginate(count, PaginationParams);
             return result;
         }
 

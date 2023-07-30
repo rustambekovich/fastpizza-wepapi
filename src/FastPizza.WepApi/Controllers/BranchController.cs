@@ -12,7 +12,7 @@ namespace FastPizza.WepApi.Controllers
     [ApiController]
     public class BranchController : ControllerBase
     {
-        private readonly int maxsize = 30; 
+        private readonly int maxsize = 3; 
         private readonly IBranchService _branchService;
 
         public BranchController(IBranchService branchService)

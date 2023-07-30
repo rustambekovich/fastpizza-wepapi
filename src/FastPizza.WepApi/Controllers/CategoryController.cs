@@ -12,7 +12,7 @@ namespace FastPizza.WepApi.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-        private readonly int maxPageSize = 30;
+        private readonly int maxPageSize = 3;
 
         public CategoryController(ICategoryService service)
         {
@@ -20,7 +20,7 @@ namespace FastPizza.WepApi.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
 
         public async Task<IActionResult> CreateAsync([FromForm] CategoryCreateDto dto)
         {

@@ -1,4 +1,5 @@
-﻿using FastPizza.DataAccess.Interfaces.Useries;
+﻿using FastPizza.DataAccess.Interfaces;
+using FastPizza.DataAccess.Interfaces.Useries;
 using FastPizza.DataAccess.Utils;
 using FastPizza.Domain.Entities.Users;
 using FastPizza.Domain.Enums;
@@ -6,16 +7,20 @@ using FastPizza.Domain.Exceptions.Users;
 using FastPizza.Service.Common.Security;
 using FastPizza.Service.Commons.Helper;
 using FastPizza.Service.Dtos.UserAuth;
+using FastPizza.Service.Interfaces.Common;
 using FastPizza.Service.Interfaces.Useries;
 
 namespace FastPizza.Service.Services.Useries;
 
 public class UserService : IUserservice
 {
+    private IPaginator _pageator;
     private IUser _userRepository;
 
-    public UserService(IUser userRepository)
+    public UserService(IUser userRepository,
+        IPaginator paginator)
     {
+        this._pageator = paginator;
         this._userRepository = userRepository;
     }
     public async Task<long> CountAsync()
@@ -43,6 +48,8 @@ public class UserService : IUserservice
         {
             throw new UserNotFoundException();
         }
+        var count = await _userRepository.CountAsync();
+        _pageator.Paginate(count, PaginationParams);
         return result.ToList();
     }
 
