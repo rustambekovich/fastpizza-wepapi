@@ -6,11 +6,6 @@ using FastPizza.Service.Commons.Helper;
 using FastPizza.Service.Dtos.Auth;
 using FastPizza.Service.Interfaces.Common;
 using FastPizza.Service.Interfaces.Customeries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FastPizza.Service.Services.Customeries
 {
@@ -63,7 +58,7 @@ namespace FastPizza.Service.Services.Customeries
         public async Task<Customer> GetByIdAsync(long id)
         {
             var result = await _repositoryCustomer.GetByIdAsync(id);
-            if(result is null)
+            if (result is null)
             {
                 throw new CustomerNotFoundException();
             }
@@ -76,7 +71,7 @@ namespace FastPizza.Service.Services.Customeries
         public async Task<bool> UpdateAsync(long id, RegistrDto dto)
         {
             var resil = await _repositoryCustomer.GetByIdAsync(id);
-            if(resil is null)
+            if (resil is null)
             {
                 throw new CustomerNotFoundException();
             }

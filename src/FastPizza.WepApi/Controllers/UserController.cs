@@ -3,9 +3,7 @@ using FastPizza.Service.Dtos.UserAuth;
 using FastPizza.Service.Interfaces.Useries;
 using FastPizza.Service.Validators.Dtos.AuthUserValidatories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 namespace FastPizza.WepApi.Controllers
 {
@@ -26,12 +24,12 @@ namespace FastPizza.WepApi.Controllers
             => Ok(await _servise.CountAsync());
 
         [HttpGet]
-        [Authorize(Roles = "Admin")] 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllAsync([FromQuery] int page = 1)
             => Ok(await _servise.GetAllAsync(new PaginationParams(page, maxsize)));
 
         [HttpGet("userId")]
-        public async Task<IActionResult> GetByIdAsync( long id)
+        public async Task<IActionResult> GetByIdAsync(long id)
             => Ok(await _servise.GetByIdAsync(id));
         [HttpPut("userId")]
         [Authorize(Roles = "Admin")]
@@ -50,6 +48,6 @@ namespace FastPizza.WepApi.Controllers
         [HttpDelete("userId")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeletedAsync(long id)
-            =>Ok(await _servise.DeleteAsync(id));
+            => Ok(await _servise.DeleteAsync(id));
     }
 }

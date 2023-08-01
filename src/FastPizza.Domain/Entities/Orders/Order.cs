@@ -5,9 +5,9 @@ namespace FastPizza.Domain.Entities.Orders;
 public class Order : Auditable
 {
     public long customer_id { get; set; }
-    public long delivery_id { get; set; }
-    public OrderStatus status { get; set; }
-    public float products_price { get; set; }
+    public long deliveryId { get; set; }
+    public OrderStatus Status { get; set; }
+    public float productsPrice { get; set; }
     public float delivery_price { get; set; }
     public float result_price { get; set; }
     public float latitude { get; set; }

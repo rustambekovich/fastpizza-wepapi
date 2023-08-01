@@ -1,11 +1,4 @@
-﻿using FastPizza.Domain.Entities.Customers;
-using FastPizza.Domain.Entities.Products;
-using FastPizza.Domain.Entities.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FastPizza.Domain.Entities.Users;
 
 namespace FastPizza.DataAccess.Interfaces.Useries
 {

@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using FastPizza.DataAccess.Interfaces.Custumers;
 using FastPizza.DataAccess.Utils;
-using FastPizza.DataAccess.ViewModels.Users;
 using FastPizza.Domain.Entities.Customers;
 
 namespace FastPizza.DataAccess.Repositories.Customers
@@ -92,7 +91,7 @@ namespace FastPizza.DataAccess.Repositories.Customers
                 string query = "Select * from public.customers order by id desc " +
                     $"offset {@params.GetSkipCount()} limit {@params.PageSize}";
                 var result = (await _connection.QueryAsync<Customer>(query)).ToList();
-                return result.ToList() ;
+                return result.ToList();
             }
             catch
             {

@@ -1,6 +1,4 @@
-﻿
-using FastPizza.DataAccess.ViewModels.Users;
-using FastPizza.Domain.Entities.Customers;
+﻿using FastPizza.Domain.Entities.Customers;
 
 namespace FastPizza.DataAccess.Interfaces.Custumers
 {

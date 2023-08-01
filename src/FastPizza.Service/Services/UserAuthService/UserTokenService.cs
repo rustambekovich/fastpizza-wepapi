@@ -1,17 +1,11 @@
-﻿using FastPizza.DataAccess.Interfaces.Useries;
-using FastPizza.Domain.Entities.Customers;
-using FastPizza.Domain.Entities.Users;
+﻿using FastPizza.Domain.Entities.Users;
 using FastPizza.Service.Commons.Helper;
 using FastPizza.Service.Interfaces.UserAuth;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FastPizza.Service.Services.UserAuthService
 {

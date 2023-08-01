@@ -1,11 +1,8 @@
-﻿using FastPizza.Domain.Entities.Customers;
-using FastPizza.Service.Dtos.Auth;
-using FastPizza.Service.Dtos.BranchDto;
+﻿using FastPizza.Service.Dtos.Auth;
 using FastPizza.Service.Interfaces.Customeries;
 using FastPizza.Service.Validators.Dtos;
 using FastPizza.Service.Validators.Dtos.AuthValidatories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastPizza.WepApi.Controllers
@@ -24,7 +21,7 @@ namespace FastPizza.WepApi.Controllers
         [HttpGet("count")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CountAsync()
-            =>Ok(await _customerservice.CountAsync());
+            => Ok(await _customerservice.CountAsync());
 
         [HttpGet("customerId")]
         [Authorize(Roles = "Admin")]
@@ -34,12 +31,12 @@ namespace FastPizza.WepApi.Controllers
         [HttpDelete("customerId")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeletetAsync(long id)
-            =>Ok(await _customerservice.DeleteAsync(id));
+            => Ok(await _customerservice.DeleteAsync(id));
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllAsync([FromQuery] int page = 1)
-            =>Ok(await _customerservice.GetAllAsync(new DataAccess.Utils.PaginationParams(page, maxsize)));
+            => Ok(await _customerservice.GetAllAsync(new DataAccess.Utils.PaginationParams(page, maxsize)));
 
         [HttpPut("customerId")]
         [Authorize(Roles = "Admin")]

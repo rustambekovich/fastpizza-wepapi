@@ -1,8 +1,6 @@
 ﻿using FastPizza.DataAccess.Utils;
 using FastPizza.Domain.Entities.Customers;
-using FastPizza.Domain.Entities.Users;
 using FastPizza.Service.Dtos.Auth;
-using FastPizza.Service.Dtos.UserAuth;
 
 namespace FastPizza.Service.Interfaces.Customeries;
 

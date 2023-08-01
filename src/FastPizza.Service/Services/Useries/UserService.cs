@@ -1,5 +1,4 @@
-﻿using FastPizza.DataAccess.Interfaces;
-using FastPizza.DataAccess.Interfaces.Useries;
+﻿using FastPizza.DataAccess.Interfaces.Useries;
 using FastPizza.DataAccess.Utils;
 using FastPizza.Domain.Entities.Users;
 using FastPizza.Domain.Enums;

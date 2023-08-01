@@ -1,14 +1,7 @@
 ﻿using Dapper;
 using FastPizza.DataAccess.Interfaces.Useries;
 using FastPizza.DataAccess.Utils;
-using FastPizza.Domain.Entities.Products;
 using FastPizza.Domain.Entities.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FastPizza.DataAccess.Repositories.Useries
 {

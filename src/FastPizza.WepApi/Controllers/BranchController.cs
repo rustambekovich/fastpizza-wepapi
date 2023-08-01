@@ -4,7 +4,6 @@ using FastPizza.Service.Interfaces.Branches;
 using FastPizza.Service.Validators.Dtos.BranchValidatories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 namespace FastPizza.WepApi.Controllers
 {
@@ -12,7 +11,7 @@ namespace FastPizza.WepApi.Controllers
     [ApiController]
     public class BranchController : ControllerBase
     {
-        private readonly int maxsize = 3; 
+        private readonly int maxsize = 3;
         private readonly IBranchService _branchService;
 
         public BranchController(IBranchService branchService)
@@ -22,7 +21,7 @@ namespace FastPizza.WepApi.Controllers
 
         [HttpGet("count")]
         public async Task<IActionResult> CountAsync()
-            =>Ok( await _branchService.CountAsync());
+            => Ok(await _branchService.CountAsync());
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
@@ -44,12 +43,12 @@ namespace FastPizza.WepApi.Controllers
 
         [HttpGet("branchId")]
         public async Task<IActionResult> GetByIdasync(long id)
-            =>Ok( await _branchService.GetByIdAsync(id));
+            => Ok(await _branchService.GetByIdAsync(id));
 
         [HttpDelete("branchId")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAsync(long id)
-            => Ok( await _branchService.DeleteAsync(id));
+            => Ok(await _branchService.DeleteAsync(id));
 
         [HttpPut("branchId")]
         [Authorize(Roles = "Admin")]
@@ -63,6 +62,6 @@ namespace FastPizza.WepApi.Controllers
             }
             else return BadRequest(result.Errors);
         }
-            
+
     }
 }

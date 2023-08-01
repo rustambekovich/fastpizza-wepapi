@@ -1,5 +1,4 @@
 ﻿using FastPizza.DataAccess.Interfaces.Useries;
-using FastPizza.Domain.Entities.Customers;
 using FastPizza.Domain.Entities.Users;
 using FastPizza.Domain.Enums;
 using FastPizza.Domain.Exceptions.Auth;
@@ -8,14 +7,11 @@ using FastPizza.Domain.Exceptions.Users;
 using FastPizza.Service.Common.Helpers;
 using FastPizza.Service.Common.Security;
 using FastPizza.Service.Commons.Helper;
-using FastPizza.Service.Dtos.Auth;
 using FastPizza.Service.Dtos.Notifications;
 using FastPizza.Service.Dtos.Security;
 using FastPizza.Service.Dtos.UserAuth;
-using FastPizza.Service.Interfaces.Auth;
 using FastPizza.Service.Interfaces.Notifications;
 using FastPizza.Service.Interfaces.UserAuth;
-using FastPizza.Service.Services.Auth;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace FastPizza.Service.Services.UserAuthService;
@@ -152,10 +148,10 @@ public class UserAuthServiceSMS : IAuthUserServiceSMS
         user.PhoneNumber = registerUserDto.PhoneNumber;
         user.PassportSeriaNumber = registerUserDto.PassportSeriaNumber;
         user.BithdayDate = registerUserDto.BithdayDate;
-        user.MiddleName= registerUserDto.MiddleName;
+        user.MiddleName = registerUserDto.MiddleName;
         user.IsMale = registerUserDto.IsMale;
         user.IdentityRole = UserRole.User;
-        user.WasBorn= registerUserDto.WasBorn;
+        user.WasBorn = registerUserDto.WasBorn;
         user.CreatedAt = user.UpdatedAt = TimeHelper.GetDateTime();
         //user.ImagePath = registerUserDto.ImagePath.ToString();
         var hasherResult = PasswordHasher.Hash(registerUserDto.Password);

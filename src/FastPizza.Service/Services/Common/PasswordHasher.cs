@@ -1,6 +1,4 @@
-﻿using Org.BouncyCastle.Crypto.Generators;
-
-namespace FastPizza.Service.Common.Security;
+﻿namespace FastPizza.Service.Common.Security;
 
 public class PasswordHasher
 {

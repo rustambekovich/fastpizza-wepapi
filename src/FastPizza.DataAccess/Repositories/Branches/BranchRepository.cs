@@ -2,7 +2,6 @@
 using FastPizza.DataAccess.Interfaces.Branches;
 using FastPizza.DataAccess.Utils;
 using FastPizza.Domain.Entities.Branches;
-using FastPizza.Domain.Entities.Categories;
 
 namespace FastPizza.DataAccess.Repositories.Branches
 {
@@ -111,7 +110,7 @@ namespace FastPizza.DataAccess.Repositories.Branches
             try
             {
                 await _connection.OpenAsync();
-                string query =$"UPDATE public.branch " +
+                string query = $"UPDATE public.branch " +
                     $"SET name = @Name, latitude = @Latitude, longitude = @Longitude, updated_at = @UpdatedAt " +
                     $"WHERE id = {id};";
                 var result = await _connection.ExecuteAsync(query, entity);

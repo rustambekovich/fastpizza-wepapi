@@ -22,8 +22,8 @@ namespace FastPizza.Service.Services.Btanches
         }
         public async Task<long> CountAsync()
         {
-           var count = await _branchRepository.CountAsync();
-            if(count == 0) throw new BrenchNotFoundException();
+            var count = await _branchRepository.CountAsync();
+            if (count == 0) throw new BrenchNotFoundException();
             else
             {
                 return count;
@@ -32,7 +32,7 @@ namespace FastPizza.Service.Services.Btanches
 
         public async Task<bool> CreateAsync(BranchCreatDto dto)
         {
-           // var getres = await _branchRepository.GetByIdAsync(d)
+            // var getres = await _branchRepository.GetByIdAsync(d)
             Branch branch = new Branch()
             {
                 Name = dto.Name,
@@ -48,7 +48,7 @@ namespace FastPizza.Service.Services.Btanches
         public async Task<bool> DeleteAsync(long id)
         {
             var resId = await _branchRepository.GetByIdAsync(id);
-            if(resId == null)
+            if (resId == null)
             {
                 throw new BrenchNotFoundException();
             }
@@ -63,7 +63,7 @@ namespace FastPizza.Service.Services.Btanches
         public async Task<List<Branch>> GetAllAsync(PaginationParams PaginationParams)
         {
             var result = await _branchRepository.GetAllAsync(PaginationParams);
-            if(result is null)
+            if (result is null)
             {
                 throw new BrenchNotFoundException();
             }
@@ -75,26 +75,26 @@ namespace FastPizza.Service.Services.Btanches
         public async Task<Branch> GetByIdAsync(long id)
         {
             var result = await _branchRepository.GetByIdAsync(id);
-            if(result is null) throw new BrenchNotFoundException();
+            if (result is null) throw new BrenchNotFoundException();
             else return result;
         }
 
         public async Task<bool> UpdateAsync(long id, BranchCreatDto dto)
         {
             var resId = await _branchRepository.GetByIdAsync(id);
-            if(resId == null)
+            if (resId == null)
             {
                 throw new BrenchNotFoundException();
             }
             else
             {
-                resId.Name= dto.Name;
+                resId.Name = dto.Name;
                 resId.Longitude = dto.Longitude;
                 resId.Latitude = dto.Latitude;
                 resId.UpdatedAt = TimeHelper.GetDateTime();
             }
             var result = await _branchRepository.UpdateAsync(id, resId);
-            if(result != 0) return true;
+            if (result != 0) return true;
             else return false;
         }
     }

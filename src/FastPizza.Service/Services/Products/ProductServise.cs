@@ -5,7 +5,6 @@ using FastPizza.Service.Commons.Helper;
 using FastPizza.Service.Dtos.ProductDtos;
 using FastPizza.Service.Interfaces.Common;
 using FastPizza.Service.Interfaces.Products;
-using FastPizza.Service.Services.Common;
 
 namespace FastPizza.Service.Services.Products
 {

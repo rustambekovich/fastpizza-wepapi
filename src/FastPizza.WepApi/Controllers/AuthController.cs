@@ -4,7 +4,6 @@ using FastPizza.Service.Validators.Dtos;
 using FastPizza.Service.Validators.Dtos.AuthValidatories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Numerics;
 
 namespace FastPizza.WepApi.Controllers
 {
