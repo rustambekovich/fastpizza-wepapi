@@ -4,17 +4,17 @@ namespace FastPizza.Domain.Entities.Orders;
 
 public class Order : Auditable
 {
-    public long customer_id { get; set; }
-    public long deliveryId { get; set; }
+    public long CustomerId { get; set; }
+    public long DeliveryId { get; set; }
     public OrderStatus Status { get; set; }
-    public float productsPrice { get; set; }
-    public float delivery_price { get; set; }
-    public float result_price { get; set; }
-    public float latitude { get; set; }
-    public float longitude { get; set; }
-    public PaymentType Type { get; set; }
-    public bool is_paid { get; set; }
-    public string description { get; set; } = string.Empty;
+    public float ProductsPrice { get; set; }
+    public float DeliveryPrice { get; set; }
+    public float ResultPrice { get; set; }
+    public float Latitude { get; set; }
+    public float Longitude { get; set; }
+    public PaymentType PaymentType { get; set; }
+    public bool IsPaid { get; set; }
+    public string Description { get; set; } = string.Empty;
     public OrderType OrderType { get; set; }
     public long BranchID { get; set; }
 }

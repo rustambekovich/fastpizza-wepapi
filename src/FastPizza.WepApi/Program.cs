@@ -1,11 +1,15 @@
 using FastPizza.DataAccess.Interfaces.Branches;
 using FastPizza.DataAccess.Interfaces.Categories;
 using FastPizza.DataAccess.Interfaces.Custumers;
+using FastPizza.DataAccess.Interfaces.OrderIteams;
+using FastPizza.DataAccess.Interfaces.Orders;
 using FastPizza.DataAccess.Interfaces.Products;
 using FastPizza.DataAccess.Interfaces.Useries;
 using FastPizza.DataAccess.Repositories.Branches;
 using FastPizza.DataAccess.Repositories.Categories;
 using FastPizza.DataAccess.Repositories.Customers;
+using FastPizza.DataAccess.Repositories.OrderIteams;
+using FastPizza.DataAccess.Repositories.Orders;
 using FastPizza.DataAccess.Repositories.Products;
 using FastPizza.DataAccess.Repositories.Useries;
 using FastPizza.Service.Interfaces.Auth;
@@ -14,6 +18,8 @@ using FastPizza.Service.Interfaces.Categories;
 using FastPizza.Service.Interfaces.Common;
 using FastPizza.Service.Interfaces.Customeries;
 using FastPizza.Service.Interfaces.Notifications;
+using FastPizza.Service.Interfaces.OrderIteams;
+using FastPizza.Service.Interfaces.Orders;
 using FastPizza.Service.Interfaces.Products;
 using FastPizza.Service.Interfaces.UserAuth;
 using FastPizza.Service.Interfaces.Useries;
@@ -22,7 +28,9 @@ using FastPizza.Service.Services.Btanches;
 using FastPizza.Service.Services.Categories;
 using FastPizza.Service.Services.Common;
 using FastPizza.Service.Services.Customeries;
+using FastPizza.Service.Services.Iteam;
 using FastPizza.Service.Services.Notification;
+using FastPizza.Service.Services.Orders;
 using FastPizza.Service.Services.Products;
 using FastPizza.Service.Services.UserAuthService;
 using FastPizza.Service.Services.Useries;
@@ -46,6 +54,8 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IBranchRepository, BranchRepository>();
 builder.Services.AddScoped<IUser, UserRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderIteam, OrderItem>();
 
 
 builder.Services.AddScoped<IProductServise, ProductServise>();
@@ -62,6 +72,8 @@ builder.Services.AddScoped<IBranchService, BranchService>();
 builder.Services.AddScoped<IUserservice, UserService>();
 builder.Services.AddScoped<IPaginator, Paginator>();
 builder.Services.AddScoped<ICustomer, CustomerService>();
+builder.Services.AddScoped<IOrderService, OrderServise>();
+builder.Services.AddScoped<IOrderIteams, OrderItemService>();
 
 builder.Services.AddCors(option =>
 {
